@@ -4,16 +4,20 @@ import axios from "axios";
 export default function App() {
   const [news, setNews] = useState([]);
   const [search, setSearch] = useState("");
+  const [loading, setLoading] = useState(false);
+
 
   useEffect(() => {
     const getNews = async () => {
       try {
         const response = await axios.get(
-          `http://hn.algolia.com/api/v1/search_by_date?tags=story`,
+          `http://hn.algolia.com/api/v1/search_by_date?tags=story`
         );
         setNews(response.data.hits);
       } catch (error) {
         console.log(error);
+      } finally {
+        setLoading(false);
       }
     };
     getNews();
@@ -23,11 +27,13 @@ export default function App() {
     event.preventDefault();
     try {
       const response = await axios.get(
-        `http://hn.algolia.com/api/v1/search?query=${search}`,
+        `http://hn.algolia.com/api/v1/search?query=${search}`
       );
       setNews(response.data.hits);
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -50,24 +56,28 @@ export default function App() {
         </form>
       </div>
       <div className="news-list">
-        <ul className="numberList">
-          {news.map((item, index) => (
-            <li key={item.objectID} className="news-item">
-              <div className="news-title">
-                {index + 1}.{" "}
-                <a href={item.url} target="_blank" rel="noreferrer">
-                  {item.title}
-                </a>
-              </div>
+        {loading ? (
+          <div className="loading">Loading...</div>
+        ) : (
+          <ul className="numberList">
+            {news.map((item, index) => (
+              <li key={item.objectID} className="news-item">
+                <div className="news-title">
+                  {index + 1}.{" "}
+                  <a href={item.url} target="_blank" rel="noreferrer">
+                    {item.title}
+                  </a>
+                </div>
 
-              <div className="news-details">
-                <span>{item.points} points </span>
-                <span>by {item.author}</span>
-                <span>{item.num_comments} comments</span>
-              </div>
-            </li>
-          ))}
-        </ul>
+                <div className="news-details">
+                  <span>{item.points} points </span>
+                  <span>by {item.author}</span>
+                  <span>{item.num_comments} comments</span>
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </>
   );
