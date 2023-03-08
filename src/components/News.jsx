@@ -11,7 +11,7 @@ export default function App() {
     const getNews = async () => {
       try {
         const response = await axios.get(
-          `http://hn.algolia.com/api/v1/search_by_date?tags=story`
+          `https://hn.algolia.com/api/v1/search_by_date?tags=story`
         );
         setNews(response.data.hits);
       } catch (error) {
@@ -27,7 +27,7 @@ export default function App() {
     event.preventDefault();
     try {
       const response = await axios.get(
-        `http://hn.algolia.com/api/v1/search?query=${search}`
+        `https://hn.algolia.com/api/v1/search?query=${search}`
       );
       setNews(response.data.hits);
     } catch (error) {
