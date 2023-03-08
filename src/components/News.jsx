@@ -9,7 +9,15 @@ export default function App() {
     const getNews = async () => {
       try {
         const response = await axios.get(
-          `http://hn.algolia.com/api/v1/search_by_date?tags=story`
+          `http://hn.algolia.com/api/v1/search_by_date?tags=story`,
+          {
+            headers: {
+              "X-Requested-With": "XMLHttpRequest",
+              "Access-Control-Allow-Origin": "*",
+              "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+              "Access-Control-Allow-Headers": "Content-Type, Authorization",
+            },
+          }
         );
         setNews(response.data.hits);
       } catch (error) {
@@ -23,7 +31,15 @@ export default function App() {
     event.preventDefault();
     try {
       const response = await axios.get(
-        `http://hn.algolia.com/api/v1/search?query=${search}`
+        `http://hn.algolia.com/api/v1/search?query=${search}`,
+        {
+          headers: {
+            "X-Requested-With": "XMLHttpRequest",
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+            "Access-Control-Allow-Headers": "Content-Type, Authorization",
+          },
+        }
       );
       setNews(response.data.hits);
     } catch (error) {
