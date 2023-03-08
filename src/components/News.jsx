@@ -9,7 +9,7 @@ export default function App() {
     const getNews = async () => {
       try {
         const response = await axios.get(
-          `http://hn.algolia.com/api/v1/search_by_date?tags=story`,
+          `https://hn.algolia.com/api/v1/search_by_date?tags=story`,
           {
             headers: {
               "X-Requested-With": "XMLHttpRequest",
@@ -31,7 +31,7 @@ export default function App() {
     event.preventDefault();
     try {
       const response = await axios.get(
-        `http://hn.algolia.com/api/v1/search?query=${search}`,
+        `https://hn.algolia.com/api/v1/search?query=${search}`,
         {
           headers: {
             "X-Requested-With": "XMLHttpRequest",
