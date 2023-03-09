@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-export default function App() {
+export default function News() {
   const [news, setNews] = useState([]);
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
