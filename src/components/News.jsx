@@ -4,7 +4,7 @@ import axios from "axios";
 export default function News() {
   const [news, setNews] = useState([]);
   const [search, setSearch] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
 
   useEffect(() => {
